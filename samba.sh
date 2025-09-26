@@ -189,6 +189,9 @@ ln -sf "$config" /etc/samba.conf
 [ -d /var/log/samba/cores ] && chmod -R 0700 /var/log/samba/cores
 [ -d /var/cache/samba/msg.lock ] && chmod -R 0755 /var/cache/samba/msg.lock
 
+# Start nmbd (NetBIOS name service daemon) in the background
+nmbd --configfile="$config" --foreground --debug-stdout --debuglevel=1 --no-process-group &
+
 # Start the Samba daemon with the following options:
 #  --configfile: Location of the configuration file.
 #  --foreground: Run in the foreground instead of daemonizing.
